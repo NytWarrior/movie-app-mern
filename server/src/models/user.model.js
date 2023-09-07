@@ -14,11 +14,13 @@ const userSchema = new mongoose.Scchema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     salt: {
         type: String,
-        required: true
+        required: true,
+        select: false
     }
 }, modelOptions)
 
