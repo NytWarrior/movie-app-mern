@@ -1,4 +1,4 @@
-import tmbdConfig from "./tmbd.config"
+import tmbdConfig from "./tmbd.config.js"
 
 const tmbdEndpoints = {
     MediaList: ({ mediaType, mediaCategory, page }) => tmbdConfig.getUrl(

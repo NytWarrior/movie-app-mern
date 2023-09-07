@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import modelOptions from "./model.options";
+import mongoose, { Schema } from "mongoose";
+import modelOptions from "./model.options.js";
 
 export default mongoose.model(
     "Favourite",
@@ -9,7 +9,7 @@ export default mongoose.model(
             ref: "User",
             required: true
         },
-        MediaType: {
+        mediaType: {
             type: String,
             enum: ["tv", "movie"],
             required: true
@@ -27,8 +27,8 @@ export default mongoose.model(
             required: true
         },
         mediaRate: {
-            type: String,
+            type: Number,
             required: true
-        }
+        },
     }, modelOptions)
 );

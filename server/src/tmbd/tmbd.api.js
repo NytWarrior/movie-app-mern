@@ -1,5 +1,5 @@
-import axiosClient from "../axios/axios.client";
-import tmbdEndpoints from "./tmbd.endpoint";
+import axiosClient from "../axios/axios.client.js";
+import tmbdEndpoints from "./tmbd.endpoint.js";
 
 const tmbdApi = {
     mediaList: async ({ mediaType, mediaCategory, page }) => await axiosClient.get(
