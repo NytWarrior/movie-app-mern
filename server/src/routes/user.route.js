@@ -75,13 +75,13 @@ router.get(
 router.get(
     "/favourites",
     tokenMiddleware.auth,
-    favouriteController.getFavouriteOfUser
+    favouriteController.getFavouritesOfUser
 );
 
 router.post(
     "/favourites",
     tokenMiddleware.auth,
-    body("mediatype")
+    body("mediaType")
         .exists().withMessage("MediaType is required")
         .custom(type => ["movie", "tv"].includes(type)).withMessage("MediaType invalid"),
     body("mediaId")
@@ -93,7 +93,7 @@ router.post(
         .exists().withMessage("MediaPoster is required"),
     body("mediaRate")
         .exists().withMessage("MediaRate is required"),
-    // requestHandler.auth,
+    requestHandler.validate,
     favouriteController.addFavourite
 );
 
