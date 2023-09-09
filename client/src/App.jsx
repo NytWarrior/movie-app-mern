@@ -1,9 +1,26 @@
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import themeConfigs from "./configs/theme.configs";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { themeMode } = useSelector((state) => state.themeMode);
+
   return (
-    <div>
-      App
-    </div>
+    <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="themeMode"
+      />
+      <CssBaseline />
+    </ThemeProvider>
   );
 }
 
