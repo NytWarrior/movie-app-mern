@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import GlobalLoading from '../common/GlobalLoading';
 
 const MainLayout = () => {
     return (
         <>
+            <GlobalLoading />
             <Box display="flex" minHeight="100vh">
                 <Box
                     component="main"
