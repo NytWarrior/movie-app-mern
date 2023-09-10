@@ -6,12 +6,12 @@ export const appStateSlice = createSlice({
         appState: ""
     },
     reducers: {
-        appStateMode: (state, action) => {
+        setAppState: (state, action) => {
             state.appState = action.payload;
         }
     }
 });
 
-export const { setThemeMode } = appStateSlice.actions;
+export const { setAppState } = appStateSlice.actions;
 
 export default appStateSlice.reducer;
