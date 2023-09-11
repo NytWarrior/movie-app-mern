@@ -9,7 +9,7 @@ const userEndpoints = {
 };
 
 const userApi = {
-    sigin: async ({ username, password }) => {
+    signin: async ({ username, password }) => {
         try {
             const response = await publicClient.post(
                 userEndpoints.sigin,
@@ -17,7 +17,7 @@ const userApi = {
             );
             return { response };
         } catch (error) {
-            return { err };
+            return { error };
         }
     },
 
@@ -29,7 +29,7 @@ const userApi = {
             );
             return { response };
         } catch (error) {
-            return { err };
+            return { error };
         }
     },
 
@@ -38,7 +38,7 @@ const userApi = {
             const response = await publicClient.get(userEndpoints.getInfo);
             return { response };
         } catch (error) {
-            return { err };
+            return { error };
         }
     },
 
@@ -50,7 +50,7 @@ const userApi = {
             );
             return { response };
         } catch (error) {
-            return { err };
+            return { error };
         }
     }
 };

@@ -8,16 +8,16 @@ const publicClient = axios.create({
     paramsSerializer: {
         encode: params => queryString.stringify(params)
     }
-})
+});
 
-publicClient.interceptors.request(async config => {
+publicClient.interceptors.request.use(async config => {
     return {
         ...config,
         headers: {
             "Content-Type": "application/json"
         }
-    }
-})
+    };
+});
 
 publicClient.interceptors.response.use((response) => {
     if (response && response.data) return response.data;

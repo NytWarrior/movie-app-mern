@@ -2,28 +2,33 @@ const responseWithData = (res, statusCode, data) => res.status(statusCode).json(
 
 const error = (res) => responseWithData(res, 500, {
     status: 500,
-    message: "Oops! Something went wrong!!"
-})
+    message: "Oops! Something worng!"
+});
 
-const badRequest = (res, message) => responseWithData(res, 400, {
+const badrequest = (res, message) => responseWithData(res, 400, {
     status: 400,
     message
-})
+});
 
 const ok = (res, data) => responseWithData(res, 200, data);
 
 const created = (res, data) => responseWithData(res, 201, data);
 
-const unAuthorize = (res) => responseWithData(res, 401, {
+const unauthorize = (res) => responseWithData(res, 401, {
     status: 401,
-    message: "Unauthorized"
+    message: "Unathorized"
 });
 
-const notFound = (res) => responseWithData(res, 404, {
+const notfound = (res) => responseWithData(res, 404, {
     status: 404,
-    message: "Resources not found"
+    message: "Resource not found"
 });
 
-export default { error, badRequest, ok, created, unAuthorize, notFound };
-
-
+export default {
+    error,
+    badrequest,
+    ok,
+    created,
+    unauthorize,
+    notfound
+};
