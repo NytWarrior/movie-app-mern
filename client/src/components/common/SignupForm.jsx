@@ -33,7 +33,7 @@ const SignupForm = ({ switchAuthState }) => {
                 .min(8, "displayName minimum 8 characters")
                 .required("displayName is required"),
             confirmPassword: Yup.string()
-                .oneOf([Yup.ref("Password")], "ConfirmPassword not match")
+                .oneOf([Yup.ref("password")], "ConfirmPassword not match")
                 .min(8, "ConfirmPassword minimum 8 characters")
                 .required("ConfirmPassword is required")
         }),
@@ -47,7 +47,7 @@ const SignupForm = ({ switchAuthState }) => {
                 signinForm.resetForm();
                 dispatch(setUser(response));
                 dispatch(setAuthModalOpen(false));
-                toast.success("Sign in success");
+                toast.success("Sign Up success");
             }
 
             if (err) setErrorMessage(err.message);

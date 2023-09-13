@@ -4,7 +4,7 @@ import responseHandler from "../handlers/response.handler.js";
 
 const signup = async (req, res) => {
     try {
-        const { username, password, displayname } = req.body;
+        const { username, password, displayName } = req.body;
 
         const checkUser = await userModel.findOne({ username });
 
@@ -12,14 +12,14 @@ const signup = async (req, res) => {
 
         const user = new userModel();
 
-        user.displayname = displayname;
+        user.displayName = displayName;
         user.username = username;
         user.setPassword(password);
 
         await user.save();
 
         const token = jsonwebtoken.sign(
-            { data: user._id },
+            { data: user.id },
             process.env.TOKEN_SECRET,
             { expiresIn: "24h" }
         );
@@ -40,12 +40,12 @@ const signin = async (req, res) => {
 
         const user = await userModel.findOne({ username }).select("username password salt id displayName");
 
-        if (!user) return responseHandler.badRequest(res, "User doesn't exist!");
+        if (!user) return responseHandler.badrequest(res, "User not exist");
 
         if (!user.validPassword(password)) return responseHandler.badRequest(res, "Incorrect password!!");
 
         const token = jsonwebtoken.sign(
-            { data: user._id },
+            { data: user.id },
             process.env.TOKEN_SECRET,
             { expiresIn: "24h" }
         );
@@ -77,7 +77,6 @@ const updatePassword = async (req, res) => {
         await user.save();
 
         responseHandler.ok(res);
-
     } catch {
         responseHandler.error(res);
     }
@@ -88,7 +87,7 @@ const getInfo = async (req, res) => {
         const user = await userModel.findById(req.user.id);
 
         if (!user) return responseHandler.notFound(res);
-        responseHandler.ok(res, user)
+        responseHandler.ok(res, user);
     } catch {
         responseHandler.error(res);
     }

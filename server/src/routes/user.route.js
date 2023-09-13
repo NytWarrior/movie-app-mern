@@ -35,7 +35,7 @@ router.post(
 );
 
 router.post(
-    "signin",
+    "/signin",
     body("username")
         .exists().withMessage("Username is required")
         .isLength({ min: 8 }).withMessage("username minimum 8 characters"),
