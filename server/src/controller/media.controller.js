@@ -1,9 +1,9 @@
 import responseHandler from "../handlers/response.handler.js";
-import tokenMiddleware from "../middlewares/token.middleware.js";
 import tmdbApi from "../tmdb/tmdb.api.js";
 import userModel from "../models/user.model.js";
 import favouriteModel from "../models/favourite.model.js";
 import reviewModel from "../models/review.model.js";
+import tokenMiddlerware from "../middlewares/token.middleware.js";
 
 const getList = async (req, res) => {
     try {
@@ -38,7 +38,8 @@ const search = async (req, res) => {
             page,
             mediaType: mediaType === "people" ? "person" : mediaType
         });
-        return responseHandler.ok(res, response);
+
+        responseHandler.ok(res, response);
     } catch {
         responseHandler.error(res);
     }
@@ -61,7 +62,7 @@ const getDetail = async (req, res) => {
 
         media.images = await tmdbApi.mediaImages(params);
 
-        const tokenDecoded = tokenMiddleware.tokenDecode(req);
+        const tokenDecoded = tokenMiddlerware.tokenDecode(req);
 
         if (tokenDecoded) {
             const user = await userModel.findById(tokenDecoded.data);
@@ -78,6 +79,6 @@ const getDetail = async (req, res) => {
     } catch {
         responseHandler.error(res);
     }
-}
+};
 
 export default { getList, getGenres, search, getDetail };

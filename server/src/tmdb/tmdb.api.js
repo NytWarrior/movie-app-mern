@@ -3,10 +3,10 @@ import tmdbEndpoints from "./tmdb.endpoint.js";
 
 const tmdbApi = {
     mediaList: async ({ mediaType, mediaCategory, page }) => await axiosClient.get(
-        tmdbEndpoints.MediaList({ mediaType, mediaCategory, page })
+        tmdbEndpoints.mediaList({ mediaType, mediaCategory, page })
     ),
-    mediaDetail: async ({ mediaType, page }) => await axiosClient.get(
-        tmdbEndpoints.mediaDetail({ mediaType, page })
+    mediaDetail: async ({ mediaType, mediaId }) => await axiosClient.get(
+        tmdbEndpoints.mediaDetail({ mediaType, mediaId })
     ),
     mediaGenres: async ({ mediaType }) => await axiosClient.get(
         tmdbEndpoints.mediaGenres({ mediaType })
@@ -31,7 +31,7 @@ const tmdbApi = {
     ),
     personMedias: async ({ personId }) => await axiosClient.get(
         tmdbEndpoints.personMedias({ personId })
-    ),
+    )
 };
 
 export default tmdbApi;

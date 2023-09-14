@@ -19,9 +19,9 @@ const unAuthorize = (res) => responseWithData(res, 401, {
     message: "Unathorized"
 });
 
-const notfound = (res) => responseWithData(res, 404, {
+const notFound = (res) => responseWithData(res, 404, {
     status: 404,
     message: "Resource not found"
 });
 
-export default { error, badRequest, ok, created, unAuthorize, notfound };
+export default { error, badRequest, ok, created, unAuthorize, notFound };

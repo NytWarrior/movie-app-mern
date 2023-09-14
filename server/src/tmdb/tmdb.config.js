@@ -1,5 +1,5 @@
-const baseUrl = process.env.tmdb_BASE_URL;
-const key = process.env.tmdb_KEY;
+const baseUrl = process.env.TMDB_BASE_URL;
+const key = process.env.TMDB_KEY;
 
 const getUrl = (endpoint, params) => {
     const qs = new URLSearchParams(params);
