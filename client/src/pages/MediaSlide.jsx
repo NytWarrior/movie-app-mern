@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import mediaApi from "../api/modules/media.api";
 import AutoSwiper from "../components/common/AutoSwiper";
 import { SwiperSlide } from "swiper/react";
-
+import MediaItem from "../components/common/MediaItem";
+import { toast } from "react-toastify";
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
     const [medias, setMedias] = useState([]);
@@ -18,9 +19,9 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
 
     return (
         <AutoSwiper>
-            {medias.map((medias, index) => (
+            {medias.map((media, index) => (
                 <SwiperSlide key={index}>
-                    {/* mediaItem */}
+                    <MediaItem media={media} mediaType={mediaType} />
                 </SwiperSlide>
             ))}
         </AutoSwiper>

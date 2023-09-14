@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
-import Swiper from "swiper/react";
-
+import { Swiper } from "swiper/react";
 
 const AutoSwiper = ({ children }) => {
     return (
@@ -22,7 +21,7 @@ const AutoSwiper = ({ children }) => {
                 {children}
             </Swiper>
         </Box>
-    )
+    );
 };
 
 export default AutoSwiper;
