@@ -24,6 +24,7 @@ import favoriteApi from "../api/modules/favorite.api";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { addFavorite, removeFavorite } from "../redux/features/userSlice";
+import PosterSlide from "../components/common/PosterSlide";
 
 const MediaDetail = () => {
 
@@ -229,6 +230,12 @@ const MediaDetail = () => {
                             </Container>
                         )}
 
+                        {/* media posters */}
+                        {media.images.posters.length > 0 && (
+                            <Container header="posters">
+                                <PosterSlide posters={media.images.posters} />
+                            </Container>
+                        )}
                     </Box>
                 </Box>
             </>
