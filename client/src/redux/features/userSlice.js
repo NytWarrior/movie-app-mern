@@ -4,7 +4,7 @@ export const userSlice = createSlice({
     name: "User",
     initialState: {
         user: null,
-        listFavourites: []
+        listFavorites: []
     },
     reducers: {
         setUser: (state, action) => {
@@ -15,18 +15,18 @@ export const userSlice = createSlice({
             }
             state.user = action.payload;
         },
-        setListFavourites: (state, action) => {
-            state.listFavourites = action.payload;
+        setListFavorites: (state, action) => {
+            state.listFavorites = action.payload;
         },
-        removeFavourite: (state, action) => {
-            const { mediaid } = action.payload;
-            state.listFavourites = [...state.listFavourites].filter(e => e.mediaid.toString() !== mediaid.toString());
+        removeFavorite: (state, action) => {
+            const { mediaId } = action.payload;
+            state.listFavorites = [...state.listFavorites].filter(e => e.mediaId.toString() !== mediaId.toString());
         },
-        addFavourites: (state, action) => {
-            state.listFavourites = [action.payload, ...state.listFavourites];
+        addFavorite: (state, action) => {
+            state.listFavorites = [action.payload, ...state.listFavorites];
         }
     }
 });
 
-export const { setUser, setListFavourites, addFavourites, removeFavourite } = userSlice.actions;
+export const { setUser, setListFavorites, addFavorite, removeFavorite } = userSlice.actions;
 export default userSlice.reducer;

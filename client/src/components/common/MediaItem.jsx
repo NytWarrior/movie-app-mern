@@ -8,7 +8,7 @@ import { routesGen } from "../../routes/routes";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CircularRate from "./CircularRate";
 import { useSelector } from "react-redux";
-import favouriteUtils from "../../utils/favourite.utils";
+import favoriteUtils from "../../utils/favorite.utils";
 
 const MediaItem = ({ media, mediaType }) => {
     const { listFavorites } = useSelector((state) => state.user);
@@ -44,7 +44,7 @@ const MediaItem = ({ media, mediaType }) => {
                 {/* movie or tv item */}
                 {mediaType !== "people" && (
                     <>
-                        {favouriteUtils.check({ listFavorites, mediaId: media.id }) && (
+                        {favoriteUtils.check({ listFavorites, mediaId: media.id }) && (
                             <FavoriteIcon
                                 color="primary"
                                 sx={{

@@ -26,7 +26,7 @@ const MediaDetail = () => {
     const { user, listFavourites } = useSelector((state) => state.user);
 
     const [media, setMedia] = useState();
-    const [isFavourite, setIsFavourite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
     const [onRequest, setOnRequest] = useState([]);
     const [genres, setGenres] = useState([])
 
@@ -41,7 +41,7 @@ const MediaDetail = () => {
 
             if (response) {
                 setMedia(response);
-                setIsFavourite(response.isFavourite);
+                setIsFavorite(response.isFavorite);
                 setGenres(response.genres.splice(0, 2));
             }
 
@@ -132,7 +132,7 @@ const MediaDetail = () => {
                                                 "& .MuiButon-starIcon": { marginRight: "0" }
                                             }}
                                             size="large"
-                                            startIcon={isFavourite ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
+                                            startIcon={isFavorite ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
                                             loadingPosition="start"
                                             loading={onRequest}
                                         // onClick={onFavoriteClick}
@@ -162,7 +162,7 @@ const MediaDetail = () => {
                 </Box>
             </>
         ) : null
-    )
+    );
 };
 
 export default MediaDetail;

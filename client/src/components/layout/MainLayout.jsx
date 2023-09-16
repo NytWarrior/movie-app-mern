@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import userApi from '../../api/modules/user.api';
-import favouriteApi from '../../api/modules/favourite.api';
-import { setListFavourites, setUser } from '../../redux/features/userSlice';
+import favoriteApi from '../../api/modules/favorite.api';
+import { setListFavorites, setUser } from '../../redux/features/userSlice';
 
 
 const MainLayout = () => {
@@ -29,14 +29,14 @@ const MainLayout = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        const getFavourites = async () => {
-            const { response, err } = await favouriteApi.getList();
+        const getFavorites = async () => {
+            const { response, err } = await favoriteApi.getList();
 
-            if (response) dispatch(setListFavourites(response));
+            if (response) dispatch(setListFavorites(response));
             if (err) toast.error(err.message);
         };
-        if (user) getFavourites();
-        if (!user) dispatch(setListFavourites([]));
+        if (user) getFavorites();
+        if (!user) dispatch(setListFavorites([]));
     }, [user, dispatch])
 
     return (
