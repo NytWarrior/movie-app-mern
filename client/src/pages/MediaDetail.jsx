@@ -17,23 +17,27 @@ import CastSlide from "../components/common/CastSlide";
 import uiConfigs from "../configs/ui.configs";
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import mediaApi from "../api/modules/media.api";
+import favoriteApi from "../api/modules/favorite.api";
 
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
+import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import { addFavorite, removeFavorite } from "../redux/features/userSlice";
 
 const MediaDetail = () => {
 
     const { mediaType, mediaId } = useParams();
-    const { user, listFavourites } = useSelector((state) => state.user);
+    const { user, listFavorites } = useSelector((state) => state.user);
 
     const [media, setMedia] = useState();
     const [isFavorite, setIsFavorite] = useState(false);
-    const [onRequest, setOnRequest] = useState([]);
-    const [genres, setGenres] = useState([])
+    const [onRequest, setOnRequest] = useState(false);
+    const [genres, setGenres] = useState([]);
 
     const dispatch = useDispatch();
     const videoRef = useRef(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const getMedia = async () => {
             dispatch(setGlobalLoading(true));
             const { response, err } = await mediaApi.getDetail({ mediaType, mediaId });
@@ -47,8 +51,59 @@ const MediaDetail = () => {
 
             if (err) toast.error(err.message);
         };
+
         getMedia();
     }, [mediaType, mediaId, dispatch]);
+
+    const onFavoriteClick = async () => {
+        if (!user) return dispatch(setAuthModalOpen(true));
+
+        if (onRequest) return;
+
+        if (isFavorite) {
+            onRemoveFavorite();
+            return;
+        }
+
+        setOnRequest(true);
+
+        const body = {
+            mediaId: media.id,
+            mediaTitle: media.title || media.name,
+            mediaType: mediaType,
+            mediaPoster: media.poster_path,
+            mediaRate: media.vote_average
+        };
+
+        const { response, err } = await favoriteApi.add(body);
+
+        setOnRequest(false);
+
+        if (err) toast.error(err.message);
+        if (response) {
+            dispatch(addFavorite(response));
+            setIsFavorite(true);
+            toast.success("Added to favorite");
+        }
+    };
+
+    const onRemoveFavorite = async () => {
+        if (onRequest) return;
+        setOnRequest(true);
+
+        const favorite = listFavorites.find(e => e.mediaId.toString() === media.id.toString());
+
+        const { response, err } = await favoriteApi.remove({ favoriteId: favorite.id });
+
+        setOnRequest(false);
+
+        if (err) toast.error(err.message);
+        if (response) {
+            dispatch(removeFavorite(favorite));
+            setIsFavorite(false);
+            toast.success("Removed from favorite");
+        }
+    };
 
     return (
         media ? (
@@ -135,7 +190,7 @@ const MediaDetail = () => {
                                             startIcon={isFavorite ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
                                             loadingPosition="start"
                                             loading={onRequest}
-                                        // onClick={onFavoriteClick}
+                                            onClick={onFavoriteClick}
                                         />
                                         <Button
                                             variant="contained"
