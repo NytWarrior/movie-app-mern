@@ -13,6 +13,7 @@ import CircularRate from "../components/common/CircularRate";
 import Container from "../components/common/Container";
 import ImageHeader from "../components/common/ImageHeader";
 import CastSlide from "../components/common/CastSlide";
+import MediaVideosSlide from "../components/common/MediaVideosSlide";
 
 import uiConfigs from "../configs/ui.configs";
 import tmdbConfigs from "../api/configs/tmdb.configs";
@@ -213,6 +214,12 @@ const MediaDetail = () => {
                             </Box>
                             {/* media info */}
                         </Box>
+                        {/* media videos */}
+                        <div ref={videoRef} style={{ paddingTop: "20rem" }}>
+                            <Container header="Videos">
+                                <MediaVideosSlide videos={media.videos.results.splice(0, 5)} />
+                            </Container>
+                        </div>
                     </Box>
                 </Box>
             </>
