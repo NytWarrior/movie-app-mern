@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Paper, Box, LinearProgress, Tollbar, Toolbar } from "@mui/material";
+import { Paper, Box, LinearProgress, Toolbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
