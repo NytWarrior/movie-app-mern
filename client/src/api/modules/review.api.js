@@ -1,10 +1,10 @@
-import privateClient from "../client/private.client"
+import privateClient from "../client/private.client";
 
 const reviewEndpoints = {
     list: "reviews",
     add: "reviews",
-    remove: ({ reviewId }) => `review/${reviewId}`
-}
+    remove: ({ reviewId }) => `reviews/${reviewId}`
+};
 
 const reviewApi = {
     add: async ({ mediaId, mediaType, mediaTitle, mediaPoster, content }) => {
@@ -21,7 +21,8 @@ const reviewApi = {
 
     remove: async ({ reviewId }) => {
         try {
-            const response = await privateClient.remove(reviewEndpoints.remove({ reviewId }));
+            const response = await privateClient.delete(reviewEndpoints.remove({ reviewId }));
+
             return { response };
         } catch (err) {
             return { err };
